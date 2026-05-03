@@ -109,12 +109,12 @@ export default function Home() {
   const filteredProjects = filter === "All" ? projects : projects.filter(p => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-gray-300 font-sans selection:bg-white selection:text-black overflow-x-hidden">
+    <div className="min-h-screen bg-[#07060d] text-gray-200 font-sans selection:bg-[#8B5CF6] selection:text-white overflow-x-hidden">
       <ThreeBackground />
       
       {/* Navbar */}
       <motion.header 
-        className={`fixed top-0 w-full z-[100] isolate transition-all duration-300 ${scrolled ? "bg-black/80 backdrop-blur-xl border-b border-[#8B5CF6]/20 py-4" : "bg-transparent py-6"}`}
+        className={`fixed top-0 w-full z-[100] isolate transition-all duration-300 ${scrolled ? "bg-[#090816]/80 backdrop-blur-xl border-b border-[#8B5CF6]/20 py-4" : "bg-transparent py-6"}`}
         initial={{ y: 0, opacity: 1 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -127,11 +127,11 @@ export default function Home() {
             {["Home", "About", "Services", "Portfolio", "Why Us", "Contact"].map((item) => (
               <button key={item} onClick={() => smoothScroll(item.toLowerCase().replace(" ", "-"))} className="hover:text-white transition-colors relative group scroll-mt-24">
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#8B5CF6] transition-all group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] transition-all group-hover:w-full" />
               </button>
             ))}
           </nav>
-          <MagneticButton onClick={() => smoothScroll("contact")} className="hidden md:block px-6 py-2 border border-[#8B5CF6]/30 rounded-full hover:bg-[#8B5CF6] hover:text-white transition-colors text-sm font-bold text-white" data-testid="btn-nav-contact">
+          <MagneticButton onClick={() => smoothScroll("contact")} className="hidden md:block px-6 py-2 border border-[#8B5CF6]/30 rounded-full hover:bg-[#8B5CF6] hover:text-white transition-colors text-sm font-bold text-white shadow-lg shadow-[#8B5CF6]/10" data-testid="btn-nav-contact">
             Let's Talk
           </MagneticButton>
         </div>
@@ -197,7 +197,7 @@ export default function Home() {
         </section>
 
         {/* About */}
-        <section id="about" className="py-32 bg-[#050505] relative z-20">
+        <section id="about" className="py-32 bg-[#080717] relative z-20">
           <div className="container mx-auto px-6 md:px-12">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -220,7 +220,7 @@ export default function Home() {
                       transition={{ delay: i * 0.1 }}
                       className="flex items-center gap-4 text-white font-medium"
                     >
-                      <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                      <div className="w-2 h-2 bg-[#8B5CF6] rounded-full" />
                       {item}
                     </motion.div>
                   ))}
@@ -243,7 +243,7 @@ export default function Home() {
                         whileInView={{ width: `${skill.percent}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.5, ease: "easeOut", delay: i * 0.2 }}
-                        className="h-full bg-gradient-to-r from-blue-500 to-emerald-400"
+                        className="h-full bg-gradient-to-r from-[#8B5CF6] via-[#C084FC] to-[#F472B6]"
                       />
                     </div>
                   </div>
@@ -254,7 +254,7 @@ export default function Home() {
         </section>
 
         {/* Services */}
-        <section id="services" className="py-32 relative z-20 border-t border-white/5">
+        <section id="services" className="py-32 relative z-20 border-t border-white/5 bg-gradient-to-b from-transparent to-[#0c0a18]">
           <div className="container mx-auto px-6 md:px-12">
             <SectionHeading subtitle="What We Do" title="Expertise that elevates your brand." />
             
@@ -271,9 +271,9 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="group relative p-10 bg-[#111] border border-white/5 rounded-2xl hover:bg-[#151515] transition-colors"
+                  className="group relative p-10 bg-[#0f1020] border border-white/5 rounded-2xl hover:bg-[#14162a] transition-colors"
                 >
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-emerald-400 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 rounded-t-2xl" />
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#8B5CF6] via-[#C084FC] to-[#F472B6] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 rounded-t-2xl" />
                   <div className="text-4xl font-serif text-white/20 mb-6 group-hover:text-white transition-colors">{service.num}</div>
                   <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
                   <p className="text-gray-500">{service.desc}</p>
@@ -284,7 +284,7 @@ export default function Home() {
         </section>
 
         {/* Portfolio */}
-        <section id="portfolio" className="py-32 bg-[#050505] relative z-20">
+        <section id="portfolio" className="py-32 bg-[#080717] relative z-20">
           <div className="container mx-auto px-6 md:px-12">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
               <SectionHeading subtitle="Selected Work" title="Our latest creations." />
@@ -294,7 +294,7 @@ export default function Home() {
                     key={cat}
                     onClick={() => setFilter(cat)}
                     data-testid={`btn-filter-${cat.toLowerCase()}`}
-                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${filter === cat ? 'bg-white text-black' : 'bg-white/5 text-white hover:bg-white/10'}`}
+                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${filter === cat ? 'bg-[#8B5CF6] text-white' : 'bg-white/5 text-white hover:bg-white/10'}`}
                   >
                     {cat}
                   </button>
@@ -324,7 +324,7 @@ export default function Home() {
                   
                   <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="text-blue-400 text-xs font-mono uppercase tracking-widest">{project.category}</span>
+                      <span className="text-[#C084FC] text-xs font-mono uppercase tracking-widest">{project.category}</span>
                       <span className="px-2 py-1 rounded-full bg-white/10 text-[10px] uppercase tracking-widest text-white/70">{project.metric}</span>
                     </div>
                     <h3 className="text-3xl font-serif font-bold text-white mb-3">{project.title}</h3>

@@ -40,15 +40,15 @@ export default function SalonPage() {
   const [scrolled, setScrolled] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-white font-sans selection:bg-[#8B5CF6] selection:text-white overflow-x-hidden"
+    <div className="min-h-screen bg-[#0b0914] text-white font-sans selection:bg-[#8B5CF6] selection:text-white overflow-x-hidden"
       onScroll={(e: any) => setScrolled(e.target.scrollTop > 60)}>
 
       {/* Navbar */}
-      <nav className="fixed w-full z-50 bg-[#0d0d0d]/80 backdrop-blur-2xl border-b border-white/5 transition-all duration-300">
+      <nav className="fixed w-full z-50 bg-[#0b0914]/80 backdrop-blur-2xl border-b border-white/10 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
           <div className="flex flex-col leading-none">
             <span className="text-2xl tracking-[0.3em] text-[#8B5CF6] font-light" style={{ fontFamily: "Georgia, serif" }}>GLAMOUR</span>
-            <span className="text-[9px] tracking-[0.5em] text-gray-500 uppercase mt-0.5">Beauty Studio</span>
+            <span className="text-[9px] tracking-[0.5em] text-gray-400 uppercase mt-0.5">Beauty Studio</span>
           </div>
           <div className="hidden md:flex items-center gap-10 text-sm tracking-[0.12em]">
             {(["services", "gallery", "team"] as const).map(t => (
@@ -76,7 +76,7 @@ export default function SalonPage() {
           <div className="max-w-7xl mx-auto px-6 w-full pt-20">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, ease: "easeOut" }}
               className="max-w-xl">
-              <p className="text-[#E8B4B8] tracking-[0.5em] uppercase text-xs mb-8 flex items-center gap-3">
+              <p className="text-[#C084FC] tracking-[0.5em] uppercase text-xs mb-8 flex items-center gap-3">
                 <span className="w-10 h-px bg-[#8B5CF6]" />Luxury Beauty Since 2012
               </p>
               <h1 className="text-5xl md:text-7xl font-light mb-6 leading-[1.1]" style={{ fontFamily: "Georgia, serif" }}>
@@ -91,7 +91,7 @@ export default function SalonPage() {
                   Book an Appointment
                 </button>
                 <button onClick={() => setTab("services")}
-                  className="px-8 py-4 border border-white/20 text-white hover:border-[#C9A96E] hover:text-[#C9A96E] transition-all duration-300 text-sm tracking-[0.15em] uppercase">
+                  className="px-8 py-4 border border-white/20 text-white hover:border-[#C084FC] hover:text-[#C084FC] transition-all duration-300 text-sm tracking-[0.15em] uppercase">
                   Our Services
                 </button>
               </div>
@@ -103,7 +103,7 @@ export default function SalonPage() {
           className="absolute bottom-16 right-16 hidden lg:flex flex-col gap-6">
           {[["2,000+", "Happy Clients"], ["98%", "Satisfaction"], ["10+", "Expert Stylists"]].map(([n, l]) => (
             <div key={l} className="text-right">
-              <div className="text-3xl font-light text-[#C9A96E]" style={{ fontFamily: "Georgia, serif" }}>{n}</div>
+              <div className="text-3xl font-light text-[#C084FC]" style={{ fontFamily: "Georgia, serif" }}>{n}</div>
               <div className="text-xs text-gray-500 tracking-widest uppercase mt-1">{l}</div>
             </div>
           ))}
@@ -115,9 +115,9 @@ export default function SalonPage() {
         <div className="flex gap-8 border-b border-white/10 mb-16">
           {(["services", "gallery", "team"] as const).map(t => (
             <button key={t} onClick={() => setTab(t)}
-              className={`pb-4 text-sm tracking-[0.2em] uppercase transition-all capitalize relative ${tab === t ? "text-[#C9A96E]" : "text-gray-500 hover:text-white"}`}>
+            className={`pb-4 text-sm tracking-[0.2em] uppercase transition-all capitalize relative ${tab === t ? "text-[#8B5CF6]" : "text-gray-500 hover:text-white"}`}>
               {t}
-              {tab === t && <motion.div layoutId="salon-underline" className="absolute bottom-0 left-0 right-0 h-px bg-[#C9A96E]" />}
+              {tab === t && <motion.div layoutId="salon-underline" className="absolute bottom-0 left-0 right-0 h-px bg-[#8B5CF6]" />}
             </button>
           ))}
         </div>
@@ -128,22 +128,22 @@ export default function SalonPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {services.map((s, i) => (
                   <motion.div key={i} whileHover={{ y: -6 }}
-                    className="group overflow-hidden bg-[#111] border border-white/5 hover:border-[#C9A96E]/30 transition-all duration-500 rounded-2xl">
+                    className="group overflow-hidden bg-[#111] border border-white/5 hover:border-[#8B5CF6]/30 transition-all duration-500 rounded-2xl">
                     <div className="relative h-52 overflow-hidden">
                       <img src={s.img} alt={s.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className="absolute top-3 right-3 bg-black/50 backdrop-blur px-3 py-1 text-[#C9A96E] text-xs tracking-widest">
+                      <div className="absolute top-3 right-3 bg-black/50 backdrop-blur px-3 py-1 text-[#8B5CF6] text-xs tracking-widest">
                         {s.duration}
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-lg font-light text-[#C9A96E] mb-2" style={{ fontFamily: "Georgia, serif" }}>{s.title}</h3>
+                      <h3 className="text-lg font-light text-[#8B5CF6] mb-2" style={{ fontFamily: "Georgia, serif" }}>{s.title}</h3>
                       <p className="text-gray-400 text-sm leading-relaxed mb-5 font-light">{s.desc}</p>
                       <div className="flex justify-between items-center">
                         <span className="text-white text-sm font-light">{s.price}</span>
                         <button onClick={() => { setBookingService(i); setBookingStep(1); }}
-                          className="px-5 py-2.5 border border-[#C9A96E]/40 text-[#C9A96E] hover:bg-[#C9A96E] hover:text-black transition-all text-xs tracking-widest uppercase">
+                          className="px-5 py-2.5 border border-[#8B5CF6]/40 text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-black transition-all text-xs tracking-widest uppercase">
                           Book
                         </button>
                       </div>
