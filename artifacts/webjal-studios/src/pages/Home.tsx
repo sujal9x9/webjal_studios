@@ -12,12 +12,12 @@ import realestateImg from "@assets/realestate-website_1777794447700.png";
 import ecommerceImg from "@assets/ecommerce-website_1777794447699.png";
 
 const projects = [
-  { id: 1, title: "IronFit Gym", category: "Websites", route: "/gym", image: gymImg },
-  { id: 2, title: "Glamour Salon", category: "Websites", route: "/salon", image: salonImg },
-  { id: 3, title: "LibraTrack", category: "Software", route: "/library", image: libraryImg },
-  { id: 4, title: "Savoria Restaurant", category: "Websites", route: "/restaurant", image: restaurantImg },
-  { id: 5, title: "Luxe Properties", category: "Websites", route: "/realestate", image: realestateImg },
-  { id: 6, title: "Urban Threads", category: "E-commerce", route: "/ecommerce", image: ecommerceImg },
+  { id: 1, title: "IronFit Gym", category: "Websites", route: "/gym", image: gymImg, highlight: "Class booking flow", metric: "3 tabs" },
+  { id: 2, title: "Glamour Salon", category: "Websites", route: "/salon", image: salonImg, highlight: "3-step reservations", metric: "Luxury UI" },
+  { id: 3, title: "LibraTrack", category: "Software", route: "/library", image: libraryImg, highlight: "Live analytics dashboard", metric: "Charts + CRM" },
+  { id: 4, title: "Savoria Restaurant", category: "Websites", route: "/restaurant", image: restaurantImg, highlight: "Menu + booking system", metric: "Fine dining" },
+  { id: 5, title: "Luxe Properties", category: "Websites", route: "/realestate", image: realestateImg, highlight: "Property carousel + lead form", metric: "High-end" },
+  { id: 6, title: "Urban Threads", category: "E-commerce", route: "/ecommerce", image: ecommerceImg, highlight: "Cart + checkout", metric: "Storefront" },
 ];
 
 const MagneticButton = ({ children, className, onClick, ...props }: any) => {
@@ -316,8 +316,12 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 opacity-80 group-hover:opacity-100 transition-opacity" />
                   
                   <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                    <span className="text-blue-400 text-xs font-mono uppercase tracking-widest mb-3">{project.category}</span>
-                    <h3 className="text-3xl font-serif font-bold text-white mb-6">{project.title}</h3>
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="text-blue-400 text-xs font-mono uppercase tracking-widest">{project.category}</span>
+                      <span className="px-2 py-1 rounded-full bg-white/10 text-[10px] uppercase tracking-widest text-white/70">{project.metric}</span>
+                    </div>
+                    <h3 className="text-3xl font-serif font-bold text-white mb-3">{project.title}</h3>
+                    <p className="text-sm text-gray-300 mb-6 max-w-[18rem]">{project.highlight}</p>
                     <a href={project.route} target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-sm font-bold hover:bg-gray-200 transition-colors" data-testid={`btn-view-${project.id}`}>
                       View Live Demo
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -354,6 +358,51 @@ export default function Home() {
                   <div className="text-xs text-gray-500 uppercase">{stat.sub}</div>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 relative z-20 border-t border-white/5">
+          <div className="container mx-auto px-6 md:px-12">
+            <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-stretch">
+              <div className="rounded-3xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 p-10 md:p-14">
+                <p className="text-blue-400 text-xs font-mono uppercase tracking-[0.4em] mb-4">Client Results</p>
+                <h3 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight mb-6">Built to convert, built to impress, built to stay fast.</h3>
+                <p className="text-gray-400 max-w-2xl leading-relaxed mb-8">Every demo page here is interactive, brand-matched, and structured like a real launch-ready product. The portfolio is designed to show not just visuals, but functionality and business value.</p>
+                <div className="grid sm:grid-cols-3 gap-4">
+                  {[
+                    { label: "Interactive demos", value: "6" },
+                    { label: "Live CTA flows", value: "100%" },
+                    { label: "Brand styles", value: "6" },
+                  ].map(stat => (
+                    <div key={stat.label} className="rounded-2xl bg-black/30 border border-white/10 p-5">
+                      <div className="text-3xl font-black text-white mb-1">{stat.value}</div>
+                      <div className="text-xs uppercase tracking-widest text-gray-500">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-3xl bg-[#111] border border-white/10 p-10 md:p-12 flex flex-col justify-between">
+                <div>
+                  <p className="text-primary font-mono text-xs uppercase tracking-[0.4em] mb-4">Testimonials</p>
+                  <div className="space-y-6">
+                    {[
+                      "The best thing about the build was how each demo felt like a real business website, not a template.",
+                      "The booking, cart, and dashboard interactions make the portfolio feel premium and convincing.",
+                    ].map((quote, i) => (
+                      <div key={i} className="border-l-2 border-white/10 pl-4">
+                        <p className="text-gray-300 leading-relaxed">“{quote}”</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-10">
+                  <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-bold hover:bg-gray-200 transition-colors">
+                    Start Your Project
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
