@@ -40,26 +40,26 @@ export default function SalonPage() {
   const [scrolled, setScrolled] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-white font-sans selection:bg-[#C9A96E] selection:text-black overflow-x-hidden"
+    <div className="min-h-screen bg-[#0d0d0d] text-white font-sans selection:bg-[#8B5CF6] selection:text-white overflow-x-hidden"
       onScroll={(e: any) => setScrolled(e.target.scrollTop > 60)}>
 
       {/* Navbar */}
       <nav className="fixed w-full z-50 bg-[#0d0d0d]/80 backdrop-blur-2xl border-b border-white/5 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
           <div className="flex flex-col leading-none">
-            <span className="text-2xl tracking-[0.3em] text-[#C9A96E] font-light" style={{ fontFamily: "Georgia, serif" }}>GLAMOUR</span>
+            <span className="text-2xl tracking-[0.3em] text-[#8B5CF6] font-light" style={{ fontFamily: "Georgia, serif" }}>GLAMOUR</span>
             <span className="text-[9px] tracking-[0.5em] text-gray-500 uppercase mt-0.5">Beauty Studio</span>
           </div>
           <div className="hidden md:flex items-center gap-10 text-sm tracking-[0.12em]">
             {(["services", "gallery", "team"] as const).map(t => (
               <button key={t} onClick={() => setTab(t)}
-                className={`capitalize transition-colors ${tab === t ? "text-[#C9A96E]" : "text-gray-400 hover:text-white"}`}>
+                className={`capitalize transition-colors ${tab === t ? "text-[#8B5CF6]" : "text-gray-400 hover:text-white"}`}>
                 {t}
               </button>
             ))}
-            <Link href="/" className="text-gray-500 hover:text-white transition-colors text-xs tracking-widest">Portfolio ←</Link>
+              <Link href="/" className="text-gray-500 hover:text-[#8B5CF6] transition-colors text-xs tracking-widest">Portfolio ←</Link>
             <button onClick={() => { setBookingService(0); setBookingStep(1); }}
-              className="px-6 py-3 border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-black transition-all duration-300 text-xs tracking-[0.2em] uppercase">
+              className="px-6 py-3 border border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white transition-all duration-300 text-xs tracking-[0.2em] uppercase">
               Book Now
             </button>
           </div>
@@ -77,17 +77,17 @@ export default function SalonPage() {
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, ease: "easeOut" }}
               className="max-w-xl">
               <p className="text-[#E8B4B8] tracking-[0.5em] uppercase text-xs mb-8 flex items-center gap-3">
-                <span className="w-10 h-px bg-[#E8B4B8]" />Luxury Beauty Since 2012
+                <span className="w-10 h-px bg-[#8B5CF6]" />Luxury Beauty Since 2012
               </p>
               <h1 className="text-5xl md:text-7xl font-light mb-6 leading-[1.1]" style={{ fontFamily: "Georgia, serif" }}>
-                Where Beauty<br />Becomes <span className="italic text-[#C9A96E]">Art</span>
+                Where Beauty<br />Becomes <span className="italic text-[#8B5CF6]">Art</span>
               </h1>
               <p className="text-gray-400 text-lg mb-12 leading-relaxed font-light">
                 Sophisticated artistry meets unparalleled relaxation. Every visit is a transformation.
               </p>
               <div className="flex flex-wrap gap-4">
                 <button onClick={() => { setBookingService(0); setBookingStep(1); }}
-                  className="px-8 py-4 bg-[#C9A96E] text-black hover:bg-white transition-all duration-300 text-sm tracking-[0.15em] uppercase font-medium">
+                  className="px-8 py-4 bg-[#8B5CF6] text-white hover:bg-white hover:text-black transition-all duration-300 text-sm tracking-[0.15em] uppercase font-medium">
                   Book an Appointment
                 </button>
                 <button onClick={() => setTab("services")}

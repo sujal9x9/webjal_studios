@@ -89,8 +89,8 @@ export default function EcommercePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
             className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#EC4899]/50 text-[#EC4899] text-xs font-bold uppercase tracking-widest mb-6">
-              <span className="w-1.5 h-1.5 bg-[#EC4899] rounded-full animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#8B5CF6]/50 text-[#8B5CF6] text-xs font-bold uppercase tracking-widest mb-6">
+              <span className="w-1.5 h-1.5 bg-[#8B5CF6] rounded-full animate-pulse" />
               Drop 004 — Live Now
             </div>
             <h1 className="text-7xl md:text-9xl font-black italic tracking-tighter uppercase leading-none mb-6">
@@ -103,7 +103,7 @@ export default function EcommercePage() {
                 Shop Collection
               </button>
               <button onClick={() => setFilter("Sale")}
-                className="px-8 py-4 border-2 border-[#EC4899]/50 text-[#EC4899] hover:bg-[#EC4899]/10 font-black uppercase tracking-widest transition-all rounded-sm">
+                className="px-8 py-4 border-2 border-[#8B5CF6]/50 text-[#8B5CF6] hover:bg-[#8B5CF6]/10 font-black uppercase tracking-widest transition-all rounded-sm">
                 Sale Items
               </button>
             </div>

@@ -107,7 +107,7 @@ export default function Home() {
       
       {/* Navbar */}
       <motion.header 
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-black/80 backdrop-blur-xl border-b border-white/10 py-4" : "bg-transparent py-6"}`}
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-black/80 backdrop-blur-xl border-b border-[#8B5CF6]/20 py-4" : "bg-transparent py-6"}`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -120,11 +120,11 @@ export default function Home() {
             {["Home", "About", "Services", "Portfolio", "Why Us", "Contact"].map((item) => (
               <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} className="hover:text-white transition-colors relative group">
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#8B5CF6] transition-all group-hover:w-full" />
               </a>
             ))}
           </nav>
-          <MagneticButton className="hidden md:block px-6 py-2 border border-white/20 rounded-full hover:bg-white hover:text-black transition-colors text-sm font-bold text-white" data-testid="btn-nav-contact">
+          <MagneticButton className="hidden md:block px-6 py-2 border border-[#8B5CF6]/30 rounded-full hover:bg-[#8B5CF6] hover:text-white transition-colors text-sm font-bold text-white" data-testid="btn-nav-contact">
             Let's Talk
           </MagneticButton>
         </div>
@@ -142,7 +142,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ type: "spring", stiffness: 100, damping: 20, delay: i * 0.1 + 0.5 }}
-                    className={word === "Digital" ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-blue-400 bg-[length:200%_auto] animate-gradient" : ""}
+                    className={word === "Digital" ? "text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] via-[#EC4899] to-[#8B5CF6] bg-[length:200%_auto] animate-gradient" : ""}
                   >
                     {word}
                   </motion.span>
@@ -322,7 +322,7 @@ export default function Home() {
                     </div>
                     <h3 className="text-3xl font-serif font-bold text-white mb-3">{project.title}</h3>
                     <p className="text-sm text-gray-300 mb-6 max-w-[18rem]">{project.highlight}</p>
-                    <a href={project.route} target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-sm font-bold hover:bg-gray-200 transition-colors" data-testid={`btn-view-${project.id}`}>
+                    <a href={project.route} target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-sm font-bold hover:bg-[#8B5CF6] hover:text-white transition-colors" data-testid={`btn-view-${project.id}`}>
                       View Live Demo
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>
@@ -352,7 +352,7 @@ export default function Home() {
                   transition={{ delay: i * 0.1 }}
                   className="p-6 md:p-8 rounded-2xl bg-[#111] border border-white/5 relative group overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 bg-[#8B5CF6]/10 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500 pointer-events-none" />
                   <div className="text-4xl md:text-5xl font-black text-white mb-2">{stat.val}</div>
                   <div className="text-white font-bold mb-1">{stat.title}</div>
                   <div className="text-xs text-gray-500 uppercase">{stat.sub}</div>
@@ -366,7 +366,7 @@ export default function Home() {
           <div className="container mx-auto px-6 md:px-12">
             <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-stretch">
               <div className="rounded-3xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 p-10 md:p-14">
-                <p className="text-blue-400 text-xs font-mono uppercase tracking-[0.4em] mb-4">Client Results</p>
+                <p className="text-[#8B5CF6] text-xs font-mono uppercase tracking-[0.4em] mb-4">Client Results</p>
                 <h3 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight mb-6">Built to convert, built to impress, built to stay fast.</h3>
                 <p className="text-gray-400 max-w-2xl leading-relaxed mb-8">Every demo page here is interactive, brand-matched, and structured like a real launch-ready product. The portfolio is designed to show not just visuals, but functionality and business value.</p>
                 <div className="grid sm:grid-cols-3 gap-4">
@@ -375,7 +375,7 @@ export default function Home() {
                     { label: "Live CTA flows", value: "100%" },
                     { label: "Brand styles", value: "6" },
                   ].map(stat => (
-                    <div key={stat.label} className="rounded-2xl bg-black/30 border border-white/10 p-5">
+                      <div key={stat.label} className="rounded-2xl bg-black/30 border border-[#8B5CF6]/10 p-5">
                       <div className="text-3xl font-black text-white mb-1">{stat.value}</div>
                       <div className="text-xs uppercase tracking-widest text-gray-500">{stat.label}</div>
                     </div>
@@ -384,7 +384,7 @@ export default function Home() {
               </div>
               <div className="rounded-3xl bg-[#111] border border-white/10 p-10 md:p-12 flex flex-col justify-between">
                 <div>
-                  <p className="text-primary font-mono text-xs uppercase tracking-[0.4em] mb-4">Testimonials</p>
+                  <p className="text-[#8B5CF6] font-mono text-xs uppercase tracking-[0.4em] mb-4">Testimonials</p>
                   <div className="space-y-6">
                     {[
                       "The best thing about the build was how each demo felt like a real business website, not a template.",
@@ -397,7 +397,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="mt-10">
-                  <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-bold hover:bg-gray-200 transition-colors">
+                  <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#8B5CF6] text-white font-bold hover:bg-[#7C3AED] transition-colors">
                     Start Your Project
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   </a>
@@ -462,11 +462,11 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-white/10 bg-black relative z-20 text-center text-sm text-gray-500 flex flex-col md:flex-row items-center justify-between px-6 md:px-12">
+      <footer className="py-8 border-t border-[#8B5CF6]/20 bg-black relative z-20 text-center text-sm text-gray-500 flex flex-col md:flex-row items-center justify-between px-6 md:px-12">
         <p>© {new Date().getFullYear()} Webjal Studios. All rights reserved.</p>
         <div className="flex gap-6 mt-4 md:mt-0">
           {["Home", "About", "Services", "Portfolio", "Why Us", "Contact"].map((item) => (
-            <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} className="hover:text-white transition-colors">{item}</a>
+            <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} className="hover:text-[#8B5CF6] transition-colors">{item}</a>
           ))}
         </div>
       </footer>
