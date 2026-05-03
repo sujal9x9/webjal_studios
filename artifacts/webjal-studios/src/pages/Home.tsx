@@ -318,10 +318,10 @@ export default function Home() {
                   <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
                     <span className="text-blue-400 text-xs font-mono uppercase tracking-widest mb-3">{project.category}</span>
                     <h3 className="text-3xl font-serif font-bold text-white mb-6">{project.title}</h3>
-                    <Link href={project.route} className="inline-flex w-fit items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-sm font-bold hover:bg-gray-200 transition-colors" data-testid={`btn-view-${project.id}`}>
+                    <a href={project.route} target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-sm font-bold hover:bg-gray-200 transition-colors" data-testid={`btn-view-${project.id}`}>
                       View Live Demo
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </Link>
+                    </a>
                   </div>
                 </motion.div>
               ))}
