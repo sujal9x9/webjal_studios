@@ -443,6 +443,66 @@ export default function LibraryPage() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Footer */}
+          <footer className="mt-10 pt-6 border-t border-gray-800">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+              {/* Brand */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00BCD4] to-[#1565C0] flex items-center justify-center shadow-lg shadow-cyan-500/20 flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                  </div>
+                  <span className="text-white font-bold text-sm">Bibliotech</span>
+                  <span className="text-[10px] text-gray-600 bg-gray-800 px-2 py-0.5 rounded-full">v3.2.1</span>
+                </div>
+                <p className="text-gray-600 text-xs leading-relaxed">Modern library management system. Streamlining catalogues, members, and loans for public and institutional libraries.</p>
+              </div>
+
+              {/* Quick Nav */}
+              <div>
+                <h4 className="text-gray-500 text-[10px] uppercase tracking-widest mb-3">Quick Access</h4>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {[["Dashboard", "dashboard"], ["Book Catalog", "catalog"], ["Members", "members"], ["Activity Log", "activity"], ["Reports", "reports"]].map(([label, id]) => (
+                    <button key={id} onClick={() => setActiveNav(id)}
+                      className="text-left text-xs text-gray-600 hover:text-[#00BCD4] transition-colors py-0.5">
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* System Info */}
+              <div>
+                <h4 className="text-gray-500 text-[10px] uppercase tracking-widest mb-3">System Status</h4>
+                <ul className="space-y-2">
+                  {[
+                    { label: "Database", status: "Online", ok: true },
+                    { label: "Backup", status: "Last: 2h ago", ok: true },
+                    { label: "RFID Scanner", status: "Connected", ok: true },
+                    { label: "Email Alerts", status: "Active", ok: true },
+                  ].map(({ label, status, ok }) => (
+                    <li key={label} className="flex items-center justify-between text-xs">
+                      <span className="text-gray-600">{label}</span>
+                      <span className={`flex items-center gap-1.5 ${ok ? "text-emerald-500/70" : "text-red-400"}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${ok ? "bg-emerald-500" : "bg-red-400"}`} />
+                        {status}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-between items-center gap-2 pt-4 border-t border-gray-800/60">
+              <p className="text-gray-700 text-[11px]">&copy; {new Date().getFullYear()} Bibliotech Library Management System. All rights reserved.</p>
+              <div className="flex gap-4 text-[11px] text-gray-700">
+                {["Documentation", "Support", "Privacy Policy", "Terms"].map(l => (
+                  <button key={l} className="hover:text-gray-500 transition-colors">{l}</button>
+                ))}
+              </div>
+            </div>
+          </footer>
         </div>
       </main>
 

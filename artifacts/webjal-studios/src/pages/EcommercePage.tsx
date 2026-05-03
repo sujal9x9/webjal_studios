@@ -362,11 +362,88 @@ export default function EcommercePage() {
         )}
       </AnimatePresence>
 
-      <footer className="bg-black py-12 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <span className="text-xl font-black italic">URBAN <span className="text-[#8B5CF6]">THREADS</span></span>
-          <p className="text-gray-500 text-xs tracking-widest uppercase">Free returns · Worldwide shipping · Secure checkout</p>
-          <p className="text-gray-600 text-xs">&copy; {new Date().getFullYear()} Urban Threads</p>
+      <footer className="bg-[#050505] border-t border-[#8B5CF6]/10">
+        <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Brand */}
+          <div className="lg:col-span-1">
+            <div className="text-2xl font-black italic tracking-tighter uppercase mb-3">
+              URBAN <span className="text-[#8B5CF6]">THREADS</span>
+            </div>
+            <p className="text-gray-500 text-sm leading-relaxed mb-6">Redefining urban fashion. Limited drops, exclusive cuts, zero compromises. Wear the streets.</p>
+            <div className="flex gap-3">
+              {[
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>,
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.26 8.26 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>,
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>,
+              ].map((icon, i) => (
+                <button key={i} className="w-9 h-9 border border-[#8B5CF6]/20 hover:border-[#8B5CF6] hover:text-[#8B5CF6] text-gray-600 flex items-center justify-center rounded-lg transition-colors">
+                  {icon}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Shop */}
+          <div>
+            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-6">Shop</h4>
+            <ul className="space-y-3">
+              {[["All Products", "All"], ["New Arrivals", "New"], ["Best Sellers", "Best Seller"], ["Sale Items", "Sale"]].map(([label, f]) => (
+                <li key={label}>
+                  <button onClick={() => setFilter(f)} className="text-gray-500 hover:text-[#8B5CF6] transition-colors text-sm">
+                    {label}
+                  </button>
+                </li>
+              ))}
+              {["Gift Cards", "Lookbook", "Collaborations"].map(l => (
+                <li key={l}><button className="text-gray-500 hover:text-[#8B5CF6] transition-colors text-sm">{l}</button></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Info */}
+          <div>
+            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-6">Info</h4>
+            <ul className="space-y-3">
+              {["About Us", "Sustainability", "Size Guide", "Shipping & Returns", "FAQ", "Careers"].map(l => (
+                <li key={l}><button className="text-gray-500 hover:text-[#8B5CF6] transition-colors text-sm">{l}</button></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Perks + Contact */}
+          <div>
+            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-6">We Got You</h4>
+            <ul className="space-y-4 mb-8">
+              {[
+                { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>, label: "Free returns", sub: "On all orders" },
+                { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>, label: "Fast shipping", sub: "2–5 business days" },
+                { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>, label: "Secure checkout", sub: "256-bit SSL" },
+              ].map(({ icon, label, sub }) => (
+                <li key={label} className="flex gap-3 items-start">
+                  <span className="text-[#8B5CF6] mt-0.5 flex-shrink-0">{icon}</span>
+                  <div>
+                    <div className="text-gray-300 text-sm font-bold">{label}</div>
+                    <div className="text-gray-600 text-xs">{sub}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div>
+              <p className="text-gray-600 text-xs mb-2 uppercase tracking-widest">Contact</p>
+              <p className="text-gray-500 text-sm">support@urbanthreads.com</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-3">
+            <p className="text-gray-700 text-xs">&copy; {new Date().getFullYear()} Urban Threads. All rights reserved.</p>
+            <div className="flex gap-6 text-xs text-gray-700">
+              {["Privacy", "Terms", "Accessibility"].map(l => (
+                <button key={l} className="hover:text-gray-500 transition-colors">{l}</button>
+              ))}
+            </div>
+          </div>
         </div>
       </footer>
     </div>

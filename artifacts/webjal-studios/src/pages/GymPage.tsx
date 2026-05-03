@@ -352,11 +352,82 @@ export default function GymPage() {
         )}
       </AnimatePresence>
 
-      <footer className="bg-black py-12 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-2xl font-black italic text-[#FF5722]">IRONFIT</div>
-          <p className="text-gray-500 text-sm uppercase tracking-widest">123 Fitness Blvd, Muscle City · Open 5AM - 11PM Daily</p>
-          <p className="text-gray-600 text-xs">&copy; {new Date().getFullYear()} IronFit Gym</p>
+      <footer className="bg-[#050505] border-t border-white/10">
+        {/* Main footer */}
+        <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Brand */}
+          <div className="lg:col-span-1">
+            <div className="text-3xl font-black italic tracking-tighter text-[#FF5722] mb-3">IRONFIT</div>
+            <p className="text-gray-500 text-sm leading-relaxed mb-6">No excuses. Only results. State-of-the-art equipment and expert coaches pushing you to your peak every day.</p>
+            <div className="flex gap-4">
+              {[
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>,
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>,
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.26 8.26 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>,
+              ].map((icon, i) => (
+                <button key={i} className="w-9 h-9 border border-white/10 hover:border-[#FF5722] hover:text-[#FF5722] text-gray-500 flex items-center justify-center rounded-lg transition-colors">
+                  {icon}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-6">Quick Links</h4>
+            <ul className="space-y-3">
+              {[["Classes", "classes"], ["Our Trainers", "trainers"], ["Membership Plans", "plans"], ["Free Trial", "free-trial"], ["Nutrition Coaching", "#"], ["Corporate Wellness", "#"]].map(([label, t]) => (
+                <li key={label}>
+                  <button onClick={() => t !== "#" && t !== "free-trial" ? setTab(t as any) : t === "free-trial" ? setTrialModal(true) : null}
+                    className="text-gray-500 hover:text-[#FF5722] transition-colors text-sm">
+                    {label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Hours */}
+          <div>
+            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-6">Opening Hours</h4>
+            <ul className="space-y-3 text-sm">
+              {[["Mon – Fri", "5:00 AM – 11:00 PM"], ["Saturday", "6:00 AM – 10:00 PM"], ["Sunday", "7:00 AM – 9:00 PM"], ["Public Holidays", "8:00 AM – 8:00 PM"]].map(([day, hrs]) => (
+                <li key={day} className="flex justify-between gap-4">
+                  <span className="text-gray-400">{day}</span>
+                  <span className="text-gray-600">{hrs}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-white font-black uppercase tracking-widest text-xs mb-6">Contact Us</h4>
+            <ul className="space-y-4 text-sm">
+              {[
+                { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>, text: "123 Fitness Blvd, Muscle City, CA 90210" },
+                { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.76 16.92"/></svg>, text: "+1 (800) IRON-FIT" },
+                { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>, text: "hello@ironfit.com" },
+              ].map(({ icon, text }, i) => (
+                <li key={i} className="flex gap-3 items-start">
+                  <span className="text-[#FF5722] mt-0.5 flex-shrink-0">{icon}</span>
+                  <span className="text-gray-500">{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-3">
+            <p className="text-gray-600 text-xs">&copy; {new Date().getFullYear()} IronFit Gym. All rights reserved.</p>
+            <div className="flex gap-6 text-xs text-gray-600">
+              <button className="hover:text-gray-400 transition-colors">Privacy Policy</button>
+              <button className="hover:text-gray-400 transition-colors">Terms of Service</button>
+              <button className="hover:text-gray-400 transition-colors">Cookie Policy</button>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
