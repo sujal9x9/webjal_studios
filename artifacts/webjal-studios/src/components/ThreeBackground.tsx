@@ -31,11 +31,11 @@ export default function ThreeBackground() {
     window.addEventListener("resize", resize);
 
     const colors = [
-      "rgba(108, 99, 255,",
+      "rgba(139, 92, 246,",
       "rgba(168, 85, 247,",
-      "rgba(34, 211, 238,",
       "rgba(236, 72, 153,",
-      "rgba(0, 255, 170,",
+      "rgba(196, 181, 253,",
+      "rgba(124, 58, 237,",
     ];
 
     const shapes: Particle["shape"][] = ["circle", "diamond", "square"];
@@ -130,8 +130,8 @@ export default function ThreeBackground() {
 
       // Draw particles
       particles.forEach((p) => {
-        p.x += p.speedX + (mx - canvas.width / 2) * 0.00005;
-        p.y += p.speedY + (my - canvas.height / 2) * 0.00005;
+        p.x += p.speedX + Math.sin(elapsed * 0.5 + p.id) * 0.08 + (mx - canvas.width / 2) * 0.00005;
+        p.y += p.speedY + Math.cos(elapsed * 0.45 + p.id) * 0.08 + (my - canvas.height / 2) * 0.00005;
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
         if (p.y < 0) p.y = canvas.height;
@@ -169,7 +169,7 @@ export default function ThreeBackground() {
           if (dist < 100) {
             ctx.save();
             ctx.globalAlpha = (1 - dist / 100) * 0.06;
-            ctx.strokeStyle = "rgba(108, 99, 255, 1)";
+            ctx.strokeStyle = "rgba(139, 92, 246, 1)";
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -208,7 +208,7 @@ export default function ThreeBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
+      className="fixed inset-0 pointer-events-none opacity-75"
       style={{ zIndex: -1 }}
     />
   );
