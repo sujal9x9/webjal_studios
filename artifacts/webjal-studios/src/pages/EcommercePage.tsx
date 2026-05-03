@@ -1,94 +1,374 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 
+const products = [
+  { id: 1, title: "Oversized Cyber Jacket", price: 149, originalPrice: 199, tag: "New", img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1200", rating: 4.8, reviews: 124, sizes: ["XS","S","M","L","XL"] },
+  { id: 2, title: "Neon Graffiti Hoodie", price: 89, originalPrice: null, tag: "Best Seller", img: "https://images.unsplash.com/photo-1556821840-3a63f15732ce?q=80&w=1200", rating: 4.9, reviews: 238, sizes: ["S","M","L","XL","XXL"] },
+  { id: 3, title: "Urban Tech Cargo", price: 110, originalPrice: 140, tag: "Sale", img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=1200", rating: 4.7, reviews: 87, sizes: ["28","30","32","34","36"] },
+  { id: 4, title: "Reflective Windbreaker", price: 165, originalPrice: null, tag: "New", img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1200", rating: 4.6, reviews: 53, sizes: ["S","M","L","XL"] },
+  { id: 5, title: "Distressed Denim Set", price: 195, originalPrice: 250, tag: "Sale", img: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1200", rating: 4.9, reviews: 312, sizes: ["XS","S","M","L","XL"] },
+  { id: 6, title: "Tactical Sling Bag", price: 65, originalPrice: null, tag: null, img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1200", rating: 4.8, reviews: 177, sizes: ["One Size"] },
+  { id: 7, title: "Graphic Band Tee", price: 45, originalPrice: null, tag: "Best Seller", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200", rating: 4.7, reviews: 441, sizes: ["XS","S","M","L","XL","XXL"] },
+  { id: 8, title: "Platform Combat Boots", price: 210, originalPrice: 270, tag: "Sale", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200", rating: 4.8, reviews: 95, sizes: ["6","7","8","9","10","11"] },
+];
+
+interface CartItem { id: number; title: string; price: number; img: string; size: string; qty: number; }
+
 export default function EcommercePage() {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [filter, setFilter] = useState("All");
+  const [quickView, setQuickView] = useState<number | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [checkoutStep, setCheckoutStep] = useState<"cart" | "checkout" | "confirm">("cart");
+  const [wishlist, setWishlist] = useState<number[]>([]);
+  const [added, setAdded] = useState<number | null>(null);
+
+  const cartCount = cart.reduce((sum, i) => sum + i.qty, 0);
+  const cartTotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+
+  const addToCart = (product: typeof products[0], size: string) => {
+    setCart(prev => {
+      const existing = prev.find(i => i.id === product.id && i.size === size);
+      if (existing) return prev.map(i => i.id === product.id && i.size === size ? { ...i, qty: i.qty + 1 } : i);
+      return [...prev, { id: product.id, title: product.title, price: product.price, img: product.img, size, qty: 1 }];
+    });
+    setAdded(product.id);
+    setTimeout(() => setAdded(null), 1500);
+    setQuickView(null);
+    setSelectedSize(null);
+  };
+
+  const removeFromCart = (id: number, size: string) => setCart(prev => prev.filter(i => !(i.id === id && i.size === size)));
+  const updateQty = (id: number, size: string, delta: number) => setCart(prev => prev.map(i => i.id === id && i.size === size ? { ...i, qty: Math.max(1, i.qty + delta) } : i));
+
+  const tags = ["All", "New", "Best Seller", "Sale"];
+  const filtered = filter === "All" ? products : products.filter(p => p.tag === filter);
+  const qv = quickView !== null ? products.find(p => p.id === quickView) : null;
+
   return (
-    <div className="min-h-screen bg-[#090909] text-white font-sans selection:bg-[#8B5CF6] selection:text-white">
-      <nav className="fixed w-full z-50 bg-[#090909]/90 backdrop-blur-xl border-b border-[#8B5CF6]/20">
-        <div className="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-2xl font-black italic tracking-tighter uppercase flex items-center gap-2">
+    <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-[#8B5CF6] selection:text-white overflow-x-hidden">
+      {/* Nav */}
+      <nav className="fixed w-full z-40 bg-[#080808]/90 backdrop-blur-xl border-b border-[#8B5CF6]/20">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="text-xl font-black italic tracking-tighter uppercase">
             URBAN <span className="text-[#8B5CF6]">THREADS</span>
           </div>
-          <div className="flex gap-6 text-sm font-bold uppercase tracking-wider text-gray-400">
-            <a href="#" className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.8)] transition-all">Shop All</a>
-            <a href="#" className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.8)] transition-all">New Arrivals</a>
-            <a href="#" className="text-[#EC4899] hover:drop-shadow-[0_0_8px_rgba(236,72,153,0.8)] transition-all">Sale</a>
+          <div className="hidden md:flex gap-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            {tags.map(t => (
+              <button key={t} onClick={() => setFilter(t)}
+                className={`transition-all hover:text-white ${filter === t ? (t === "Sale" ? "text-[#EC4899]" : "text-white") : ""}`}>
+                {t}
+              </button>
+            ))}
             <Link href="/" className="hover:text-white transition-colors">Portfolio ↗</Link>
           </div>
-          <div className="flex gap-4">
-            <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-[#8B5CF6] transition-colors">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            </button>
-            <button className="w-10 h-10 rounded-full border border-[#8B5CF6] bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center font-bold">
-              2
+          <div className="flex gap-3 items-center">
+            <button onClick={() => setCartOpen(true)}
+              className="relative w-10 h-10 rounded-full border border-[#8B5CF6]/40 bg-[#8B5CF6]/5 flex items-center justify-center hover:border-[#8B5CF6] transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              {cartCount > 0 && (
+                <motion.span key={cartCount} initial={{ scale: 1.5 }} animate={{ scale: 1 }}
+                  className="absolute -top-1 -right-1 w-5 h-5 bg-[#8B5CF6] text-white text-[10px] font-black rounded-full flex items-center justify-center">
+                  {cartCount}
+                </motion.span>
+              )}
             </button>
           </div>
         </div>
       </nav>
 
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#8B5CF6]/20 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#EC4899]/20 rounded-full blur-[100px] pointer-events-none" />
-        
-        <div className="container mx-auto">
-          <div className="bg-[#111] border border-white/5 rounded-3xl p-12 md:p-24 relative overflow-hidden flex items-center">
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-[url('https://images.unsplash.com/photo-1550614000-4b95d4ed89ce?q=80&w=2070')] bg-cover bg-center opacity-50 grayscale mix-blend-screen" />
-            
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="relative z-20 max-w-xl"
-            >
-              <div className="inline-block px-4 py-1 rounded-full border border-[#EC4899]/50 text-[#EC4899] text-xs font-bold uppercase tracking-widest mb-6">
-                Drop 004 // Live Now
-              </div>
-              <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-none mb-6">
-                Streetwear <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#EC4899]">Reimagined</span>
-              </h1>
-              <button className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-[#8B5CF6] hover:text-white transition-colors rounded-sm">
+      {/* Hero Banner */}
+      <section className="relative pt-20 h-[85vh] min-h-[600px] overflow-hidden flex items-center">
+        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2560&auto=format&fit=crop"
+          alt="Fashion" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] to-transparent" />
+        <div className="absolute inset-0 mix-blend-color-burn bg-[#8B5CF6]/20" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
+            className="max-w-xl">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#EC4899]/50 text-[#EC4899] text-xs font-bold uppercase tracking-widest mb-6">
+              <span className="w-1.5 h-1.5 bg-[#EC4899] rounded-full animate-pulse" />
+              Drop 004 — Live Now
+            </div>
+            <h1 className="text-7xl md:text-9xl font-black italic tracking-tighter uppercase leading-none mb-6">
+              Street<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#EC4899]">wear</span>
+            </h1>
+            <p className="text-gray-300 text-lg mb-10 font-light">Redefining urban fashion. Limited drops. Zero compromises.</p>
+            <div className="flex flex-wrap gap-4">
+              <button onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
+                className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-[#8B5CF6] hover:text-white transition-all rounded-sm shadow-lg">
                 Shop Collection
               </button>
-            </motion.div>
-          </div>
+              <button onClick={() => setFilter("Sale")}
+                className="px-8 py-4 border-2 border-[#EC4899]/50 text-[#EC4899] hover:bg-[#EC4899]/10 font-black uppercase tracking-widest transition-all rounded-sm">
+                Sale Items
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-12 px-6">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-black italic uppercase tracking-tighter mb-10 text-white flex items-center gap-4">
-            New Arrivals <span className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent" />
+      {/* Products */}
+      <section id="products" className="max-w-7xl mx-auto px-6 py-20">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
+          <h2 className="text-3xl font-black italic uppercase tracking-tighter">
+            {filter === "All" ? "All Products" : filter} <span className="text-gray-600 text-xl">({filtered.length})</span>
           </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Cyber Punk Jacket", price: "$149", rating: "4.8" },
-              { title: "Neon Graffiti Hoodie", price: "$89", rating: "4.9" },
-              { title: "Urban Tech Cargo", price: "$110", rating: "4.7" },
-              { title: "Reflective Sling Bag", price: "$65", rating: "4.8" }
-            ].map((product, i) => (
-              <motion.div 
-                key={i}
-                whileHover={{ y: -5 }}
-                className="group relative bg-[#111] border border-white/5 rounded-xl p-4 hover:border-[#8B5CF6]/50 transition-colors"
-              >
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-[#8B5CF6]/0 to-[#8B5CF6]/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                <div className="aspect-square bg-[#1a1a1a] rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
-                  <div className="w-1/2 h-1/2 bg-white/5 rotate-45 transform group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute top-2 right-2 bg-black/50 backdrop-blur text-xs font-bold px-2 py-1 rounded border border-white/10 flex items-center gap-1">
-                    <span className="text-yellow-500">★</span> {product.rating}
-                  </div>
-                </div>
-                <h3 className="font-bold mb-1 truncate">{product.title}</h3>
-                <div className="text-gray-400 mb-4">{product.price}</div>
-                <button className="w-full py-3 bg-white/5 hover:bg-[#8B5CF6] text-white font-bold uppercase tracking-wider text-sm rounded-lg transition-colors border border-white/10 hover:border-transparent">
-                  Add to Bag
-                </button>
-              </motion.div>
+          <div className="flex gap-2 flex-wrap">
+            {tags.map(t => (
+              <button key={t} onClick={() => setFilter(t)}
+                className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
+                  filter === t ? (t === "Sale" ? "bg-[#EC4899] text-white" : "bg-[#8B5CF6] text-white") :
+                  "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                }`}>
+                {t}
+              </button>
             ))}
           </div>
         </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {filtered.map((product) => (
+            <motion.div key={product.id} layout whileHover={{ y: -4 }}
+              className="group relative bg-[#111] border border-white/5 rounded-2xl overflow-hidden hover:border-[#8B5CF6]/40 transition-all">
+              <div className="relative aspect-[3/4] overflow-hidden cursor-pointer" onClick={() => { setQuickView(product.id); setSelectedSize(null); }}>
+                <img src={product.img} alt={product.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all" />
+                {product.tag && (
+                  <div className={`absolute top-3 left-3 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider rounded-full ${
+                    product.tag === "Sale" ? "bg-[#EC4899] text-white" :
+                    product.tag === "New" ? "bg-[#8B5CF6] text-white" :
+                    "bg-white text-black"
+                  }`}>{product.tag}</div>
+                )}
+                <button onClick={(e) => { e.stopPropagation(); setWishlist(prev => prev.includes(product.id) ? prev.filter(i => i !== product.id) : [...prev, product.id]); }}
+                  className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill={wishlist.includes(product.id) ? "#EC4899" : "none"} stroke={wishlist.includes(product.id) ? "#EC4899" : "currentColor"} strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button onClick={(e) => { e.stopPropagation(); setQuickView(product.id); setSelectedSize(null); }}
+                  className="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 bg-white text-black text-[11px] font-black uppercase tracking-wider rounded-full opacity-0 group-hover:opacity-100 transition-all -translate-y-2 group-hover:translate-y-0 whitespace-nowrap">
+                  Quick View
+                </button>
+              </div>
+              <div className="p-4">
+                <h3 className="font-bold text-sm mb-1 truncate">{product.title}</h3>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} width="10" height="10" viewBox="0 0 24 24" fill={i < Math.floor(product.rating) ? "#F59E0B" : "none"} stroke="#F59E0B" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    ))}
+                  </div>
+                  <span className="text-gray-500 text-[10px]">({product.reviews})</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="font-black text-white">${product.price}</span>
+                    {product.originalPrice && <span className="text-gray-500 text-xs line-through">${product.originalPrice}</span>}
+                  </div>
+                  <button onClick={() => { setQuickView(product.id); setSelectedSize(null); }}
+                    className={`text-xs px-3 py-1.5 rounded-lg font-bold transition-all ${
+                      added === product.id ? "bg-green-600 text-white" : "bg-[#8B5CF6]/20 text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white"
+                    }`}>
+                    {added === product.id ? "Added!" : "Add"}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
+
+      {/* Quick View Modal */}
+      <AnimatePresence>
+        {qv && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setQuickView(null)}>
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9 }}
+              className="bg-[#0f0f0f] border border-white/10 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl grid md:grid-cols-2"
+              onClick={e => e.stopPropagation()}>
+              <div className="relative aspect-square md:aspect-auto overflow-hidden">
+                <img src={qv.img} alt={qv.title} className="w-full h-full object-cover" />
+                {qv.tag && (
+                  <div className={`absolute top-4 left-4 px-3 py-1 text-xs font-black uppercase tracking-wider rounded-full ${
+                    qv.tag === "Sale" ? "bg-[#EC4899] text-white" : qv.tag === "New" ? "bg-[#8B5CF6] text-white" : "bg-white text-black"
+                  }`}>{qv.tag}</div>
+                )}
+              </div>
+              <div className="p-8 flex flex-col justify-between">
+                <div>
+                  <button onClick={() => setQuickView(null)} className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-white/10 rounded-full text-gray-400 hover:text-white">✕</button>
+                  <div className="flex items-center gap-2 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill={i < Math.floor(qv.rating) ? "#F59E0B" : "none"} stroke="#F59E0B" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    ))}
+                    <span className="text-gray-400 text-xs">{qv.rating} · {qv.reviews} reviews</span>
+                  </div>
+                  <h2 className="text-2xl font-black italic uppercase tracking-tighter mb-1">{qv.title}</h2>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-3xl font-black">${qv.price}</span>
+                    {qv.originalPrice && <span className="text-gray-500 text-lg line-through">${qv.originalPrice}</span>}
+                    {qv.originalPrice && <span className="text-[#EC4899] text-sm font-bold">-{Math.round((1 - qv.price / qv.originalPrice) * 100)}% OFF</span>}
+                  </div>
+                  <p className="text-sm text-gray-500 mb-6">Select Size</p>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {qv.sizes.map(size => (
+                      <button key={size} onClick={() => setSelectedSize(size)}
+                        className={`px-4 py-2 border rounded-lg text-sm font-bold transition-all ${
+                          selectedSize === size ? "border-[#8B5CF6] bg-[#8B5CF6] text-white" : "border-white/20 text-gray-300 hover:border-white/50"
+                        }`}>{size}</button>
+                    ))}
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <button onClick={() => selectedSize && addToCart(qv, selectedSize)}
+                    disabled={!selectedSize}
+                    className="w-full py-4 bg-[#8B5CF6] disabled:opacity-30 hover:bg-white hover:text-black text-white font-black uppercase tracking-widest rounded-xl transition-all">
+                    {selectedSize ? `Add to Cart — $${qv.price}` : "Select a Size"}
+                  </button>
+                  <button onClick={() => setQuickView(null)}
+                    className="w-full py-3 border border-white/10 text-gray-400 hover:text-white rounded-xl transition-colors text-sm">
+                    Continue Shopping
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cart Drawer */}
+      <AnimatePresence>
+        {cartOpen && (
+          <>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+              onClick={() => { setCartOpen(false); setCheckoutStep("cart"); }} />
+            <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-sm bg-[#0a0a0a] border-l border-white/10 flex flex-col shadow-2xl">
+              <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <h2 className="text-xl font-black uppercase tracking-tighter">
+                  {checkoutStep === "cart" ? `Cart (${cartCount})` : checkoutStep === "checkout" ? "Checkout" : "Order Confirmed"}
+                </h2>
+                <button onClick={() => { setCartOpen(false); setCheckoutStep("cart"); }} className="text-gray-400 hover:text-white">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto">
+                {checkoutStep === "cart" && (
+                  <div className="p-4 space-y-4">
+                    {cart.length === 0 ? (
+                      <div className="text-center py-16 text-gray-500">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="mx-auto mb-4 opacity-30"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                        <p className="text-sm">Your cart is empty</p>
+                        <button onClick={() => setCartOpen(false)} className="mt-4 text-[#8B5CF6] text-sm font-bold hover:underline">Continue Shopping</button>
+                      </div>
+                    ) : cart.map((item) => (
+                      <div key={`${item.id}-${item.size}`} className="flex gap-3 bg-[#111] rounded-xl p-3 border border-white/5">
+                        <img src={item.img} alt={item.title} className="w-16 h-20 object-cover rounded-lg flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-sm truncate">{item.title}</p>
+                          <p className="text-gray-500 text-xs mt-0.5">Size: {item.size}</p>
+                          <div className="flex items-center justify-between mt-2">
+                            <div className="flex items-center gap-2 bg-[#1a1a1a] rounded-lg border border-white/10">
+                              <button onClick={() => updateQty(item.id, item.size, -1)} className="w-7 h-7 flex items-center justify-center text-gray-400 hover:text-white">−</button>
+                              <span className="text-sm font-bold w-4 text-center">{item.qty}</span>
+                              <button onClick={() => updateQty(item.id, item.size, 1)} className="w-7 h-7 flex items-center justify-center text-gray-400 hover:text-white">+</button>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-black text-sm">${item.price * item.qty}</span>
+                              <button onClick={() => removeFromCart(item.id, item.size)} className="text-gray-600 hover:text-red-400 transition-colors">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {checkoutStep === "checkout" && (
+                  <div className="p-6 space-y-4">
+                    <div className="space-y-3">
+                      <input type="text" placeholder="Full Name" className="w-full bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-white text-sm outline-none focus:border-[#8B5CF6] transition-colors placeholder:text-gray-600" />
+                      <input type="email" placeholder="Email" className="w-full bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-white text-sm outline-none focus:border-[#8B5CF6] transition-colors placeholder:text-gray-600" />
+                      <input type="text" placeholder="Shipping Address" className="w-full bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-white text-sm outline-none focus:border-[#8B5CF6] transition-colors placeholder:text-gray-600" />
+                      <input type="text" placeholder="Card Number (demo)" className="w-full bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-white text-sm outline-none focus:border-[#8B5CF6] transition-colors placeholder:text-gray-600" />
+                      <div className="grid grid-cols-2 gap-3">
+                        <input type="text" placeholder="MM/YY" className="bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-white text-sm outline-none focus:border-[#8B5CF6] transition-colors placeholder:text-gray-600" />
+                        <input type="text" placeholder="CVV" className="bg-[#111] border border-white/10 px-4 py-3 rounded-xl text-white text-sm outline-none focus:border-[#8B5CF6] transition-colors placeholder:text-gray-600" />
+                      </div>
+                    </div>
+                    <div className="bg-[#111] rounded-xl p-4 border border-white/5 space-y-2 text-sm">
+                      <div className="flex justify-between text-gray-400"><span>Subtotal</span><span>${cartTotal}</span></div>
+                      <div className="flex justify-between text-gray-400"><span>Shipping</span><span className="text-green-400">Free</span></div>
+                      <div className="flex justify-between font-black text-white border-t border-white/10 pt-2 mt-2"><span>Total</span><span>${cartTotal}</span></div>
+                    </div>
+                  </div>
+                )}
+
+                {checkoutStep === "confirm" && (
+                  <div className="p-6 text-center py-16">
+                    <div className="w-16 h-16 bg-[#8B5CF6]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 className="text-xl font-black uppercase mb-2">Order Placed!</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">Your order has been confirmed. Check your email for tracking info.</p>
+                    <p className="text-[#8B5CF6] font-bold mt-2">Total: ${cartTotal}</p>
+                  </div>
+                )}
+              </div>
+
+              {cart.length > 0 && checkoutStep !== "confirm" && (
+                <div className="p-6 border-t border-white/10 space-y-3">
+                  {checkoutStep === "cart" && (
+                    <>
+                      <div className="flex justify-between font-black text-lg">
+                        <span>Total</span><span>${cartTotal}</span>
+                      </div>
+                      <button onClick={() => setCheckoutStep("checkout")}
+                        className="w-full py-4 bg-[#8B5CF6] hover:bg-white hover:text-black text-white font-black uppercase tracking-widest rounded-xl transition-all">
+                        Checkout
+                      </button>
+                    </>
+                  )}
+                  {checkoutStep === "checkout" && (
+                    <div className="flex gap-3">
+                      <button onClick={() => setCheckoutStep("cart")} className="px-4 py-4 border border-white/10 rounded-xl text-gray-400 hover:text-white transition-colors text-sm">Back</button>
+                      <button onClick={() => { setCheckoutStep("confirm"); setCart([]); }}
+                        className="flex-1 py-4 bg-[#8B5CF6] hover:bg-green-500 text-white font-black uppercase tracking-widest rounded-xl transition-all">
+                        Place Order — ${cartTotal}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+              {checkoutStep === "confirm" && (
+                <div className="p-6 border-t border-white/10">
+                  <button onClick={() => { setCartOpen(false); setCheckoutStep("cart"); }}
+                    className="w-full py-4 bg-[#8B5CF6] text-white font-black uppercase tracking-widest rounded-xl">
+                    Continue Shopping
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      <footer className="bg-black py-12 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <span className="text-xl font-black italic">URBAN <span className="text-[#8B5CF6]">THREADS</span></span>
+          <p className="text-gray-500 text-xs tracking-widest uppercase">Free returns · Worldwide shipping · Secure checkout</p>
+          <p className="text-gray-600 text-xs">&copy; {new Date().getFullYear()} Urban Threads</p>
+        </div>
+      </footer>
     </div>
   );
 }
