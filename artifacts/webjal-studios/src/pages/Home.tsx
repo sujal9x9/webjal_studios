@@ -94,7 +94,10 @@ export default function Home() {
   const y = useTransform(scrollY, [0, 1000], [0, 200]);
 
   const smoothScroll = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -122,7 +125,7 @@ export default function Home() {
           </div>
           <nav className="hidden md:flex gap-8 text-sm font-medium tracking-wide">
             {["Home", "About", "Services", "Portfolio", "Why Us", "Contact"].map((item) => (
-              <button key={item} onClick={() => smoothScroll(item.toLowerCase().replace(" ", "-"))} className="hover:text-white transition-colors relative group">
+              <button key={item} onClick={() => smoothScroll(item.toLowerCase().replace(" ", "-"))} className="hover:text-white transition-colors relative group scroll-mt-24">
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#8B5CF6] transition-all group-hover:w-full" />
               </button>
