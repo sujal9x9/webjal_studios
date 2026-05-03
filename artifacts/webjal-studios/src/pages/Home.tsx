@@ -89,6 +89,7 @@ const SectionHeading = ({ title, subtitle }: { title: string, subtitle?: string 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [filter, setFilter] = useState("All");
+  const [menuOpen, setMenuOpen] = useState(false);
   
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], [0, 200]);
@@ -134,7 +135,35 @@ export default function Home() {
           <MagneticButton onClick={() => smoothScroll("contact")} className="hidden md:block px-6 py-2 border border-[#8B5CF6]/30 rounded-full hover:bg-[#8B5CF6] hover:text-white transition-colors text-sm font-bold text-white shadow-lg shadow-[#8B5CF6]/10" data-testid="btn-nav-contact">
             Let's Talk
           </MagneticButton>
+          <button
+            className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white"
+            onClick={() => setMenuOpen(v => !v)}
+            aria-label="Toggle navigation"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
         </div>
+        <motion.div
+          initial={false}
+          animate={{ height: menuOpen ? "auto" : 0, opacity: menuOpen ? 1 : 0 }}
+          className="md:hidden overflow-hidden border-t border-white/10 bg-[#090816]/95 backdrop-blur-xl"
+        >
+          <div className="container mx-auto px-6 py-4 flex flex-col gap-3 text-sm font-medium">
+            {["Home", "About", "Services", "Portfolio", "Why Us", "Contact"].map((item) => (
+              <button
+                key={item}
+                onClick={() => { smoothScroll(item.toLowerCase().replace(" ", "-")); setMenuOpen(false); }}
+                className="text-left py-2 text-white/90"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </motion.div>
       </motion.header>
 
       <main>
