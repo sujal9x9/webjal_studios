@@ -115,8 +115,8 @@ export default function Home() {
       {/* Navbar */}
       <motion.header 
         className={`fixed top-0 w-full z-[100] isolate transition-all duration-300 ${scrolled ? "bg-black/80 backdrop-blur-xl border-b border-[#8B5CF6]/20 py-4" : "bg-transparent py-6"}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        initial={{ y: 0, opacity: 1 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
