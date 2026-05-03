@@ -96,10 +96,23 @@ export default function RealEstatePage() {
             className="hidden md:block px-6 py-2.5 border border-[#C8A951] text-[#C8A951] text-xs uppercase tracking-[0.2em] hover:bg-[#C8A951] hover:text-black transition-all duration-300">
             Contact Agent
           </button>
-          <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
+          <button className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white" onClick={() => setMenuOpen(!menuOpen)}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
         </div>
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden md:hidden border-t border-white/10 bg-[#0a0a0a]/95 backdrop-blur-2xl">
+              <div className="flex flex-col gap-3 px-6 py-5 text-sm uppercase tracking-[0.2em] text-gray-300">
+                {propertyTypes.slice(1).map(t => (
+                  <button key={t} onClick={() => { setTypeFilter(t); setMenuOpen(false); }} className={`text-left ${typeFilter === t ? "text-[#C8A951]" : ""}`}>{t}s</button>
+                ))}
+                <Link href="/" className="text-gray-500">Portfolio ←</Link>
+                <button onClick={() => { setContactModal(true); setMenuOpen(false); }} className="w-full py-3 rounded-xl bg-[#C8A951] text-black font-medium">Contact Agent</button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero */}

@@ -63,7 +63,7 @@ export default function GymPage() {
               <span className="block transform skew-x-[10deg]">Free Trial</span>
             </button>
           </div>
-          <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
+          <button className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white" onClick={() => setMenuOpen(!menuOpen)}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
         </div>

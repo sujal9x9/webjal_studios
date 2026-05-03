@@ -63,6 +63,9 @@ export default function RestaurantPage() {
           className="hidden md:block px-6 py-3 border border-[#C8A440]/60 text-[#C8A440] hover:bg-[#C8A440] hover:text-black transition-all duration-500 text-xs font-sans tracking-[0.25em] uppercase">
           Reserve a Table
         </button>
+        <button className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white" onClick={() => setReservationOpen(true)}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
       </nav>
 
       {/* Hero */}

@@ -62,8 +62,24 @@ export default function SalonPage() {
               className="px-6 py-3 border border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white transition-all duration-300 text-xs tracking-[0.2em] uppercase">
               Book Now
             </button>
+          <button className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white" onClick={() => setScrolled(s => !s)}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
           </div>
         </div>
+        <AnimatePresence>
+          {scrolled && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden md:hidden border-t border-white/10 bg-[#0b0914]/95 backdrop-blur-2xl">
+              <div className="flex flex-col gap-3 px-6 py-5 text-sm uppercase tracking-[0.2em] text-gray-300">
+                {(["services", "gallery", "team"] as const).map(t => (
+                  <button key={t} onClick={() => { setTab(t); setScrolled(false); }} className={`text-left ${tab === t ? "text-[#8B5CF6]" : ""}`}>{t}</button>
+                ))}
+                <Link href="/" className="text-gray-500">Portfolio ←</Link>
+                <button onClick={() => { setBookingService(0); setBookingStep(1); setScrolled(false); }} className="w-full py-3 rounded-xl bg-[#8B5CF6] text-white font-medium">Book Now</button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero */}
