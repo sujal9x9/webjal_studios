@@ -2,7 +2,7 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 import Home from "@/pages/Home";
@@ -22,16 +22,29 @@ function Router() {
   return (
     <AnimatePresence mode="wait">
       <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/gym" component={GymPage} />
-        <Route path="/salon" component={SalonPage} />
-        <Route path="/library" component={LibraryPage} />
-        <Route path="/realestate" component={RealEstatePage} />
-        <Route path="/restaurant" component={RestaurantPage} />
-        <Route path="/ecommerce" component={EcommercePage} />
-        <Route component={NotFound} />
+        <Route path="/" component={() => <PageTransition><Home /></PageTransition>} />
+        <Route path="/gym" component={() => <PageTransition><GymPage /></PageTransition>} />
+        <Route path="/salon" component={() => <PageTransition><SalonPage /></PageTransition>} />
+        <Route path="/library" component={() => <PageTransition><LibraryPage /></PageTransition>} />
+        <Route path="/realestate" component={() => <PageTransition><RealEstatePage /></PageTransition>} />
+        <Route path="/restaurant" component={() => <PageTransition><RestaurantPage /></PageTransition>} />
+        <Route path="/ecommerce" component={() => <PageTransition><EcommercePage /></PageTransition>} />
+        <Route component={() => <PageTransition><NotFound /></PageTransition>} />
       </Switch>
     </AnimatePresence>
+  );
+}
+
+function PageTransition({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24, scale: 0.98, filter: "blur(8px)" }}
+      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      exit={{ opacity: 0, y: -18, scale: 0.98, filter: "blur(8px)" }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
   );
 }
 

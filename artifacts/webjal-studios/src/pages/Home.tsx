@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Link } from "wouter";
 import ThreeBackground from "@/components/ThreeBackground";
 
@@ -93,6 +93,10 @@ export default function Home() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], [0, 200]);
 
+  const smoothScroll = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -118,13 +122,13 @@ export default function Home() {
           </div>
           <nav className="hidden md:flex gap-8 text-sm font-medium tracking-wide">
             {["Home", "About", "Services", "Portfolio", "Why Us", "Contact"].map((item) => (
-              <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} className="hover:text-white transition-colors relative group">
+              <button key={item} onClick={() => smoothScroll(item.toLowerCase().replace(" ", "-"))} className="hover:text-white transition-colors relative group">
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#8B5CF6] transition-all group-hover:w-full" />
-              </a>
+              </button>
             ))}
           </nav>
-          <MagneticButton className="hidden md:block px-6 py-2 border border-[#8B5CF6]/30 rounded-full hover:bg-[#8B5CF6] hover:text-white transition-colors text-sm font-bold text-white" data-testid="btn-nav-contact">
+          <MagneticButton onClick={() => smoothScroll("contact")} className="hidden md:block px-6 py-2 border border-[#8B5CF6]/30 rounded-full hover:bg-[#8B5CF6] hover:text-white transition-colors text-sm font-bold text-white" data-testid="btn-nav-contact">
             Let's Talk
           </MagneticButton>
         </div>
@@ -322,10 +326,19 @@ export default function Home() {
                     </div>
                     <h3 className="text-3xl font-serif font-bold text-white mb-3">{project.title}</h3>
                     <p className="text-sm text-gray-300 mb-6 max-w-[18rem]">{project.highlight}</p>
-                    <a href={project.route} target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-sm font-bold hover:bg-[#8B5CF6] hover:text-white transition-colors" data-testid={`btn-view-${project.id}`}>
+                    <motion.a
+                      href={project.route}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.06, y: -2 }}
+                      whileTap={{ scale: 0.96 }}
+                      transition={{ type: "spring", stiffness: 320, damping: 18 }}
+                      className="inline-flex w-fit items-center gap-2 px-6 py-3 bg-white text-black rounded-full text-sm font-bold hover:bg-[#8B5CF6] hover:text-white transition-colors"
+                      data-testid={`btn-view-${project.id}`}
+                    >
                       View Live Demo
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </a>
+                    </motion.a>
                   </div>
                 </motion.div>
               ))}
