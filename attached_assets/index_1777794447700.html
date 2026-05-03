@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webjal Studios — We Build Digital Experiences</title>
+    <meta name="description"
+        content="Webjal Studios crafts premium websites, software, and creative digital solutions. Modern design, fast delivery, and exceptional results.">
+    <meta name="keywords" content="web development, UI/UX design, software development, digital agency, Webjal Studios">
+    <meta name="author" content="Webjal Studios">
+    <meta name="theme-color" content="#0a0a1a">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <script>
+        (function () {
+            emailjs.init("ONU_bNKVVFv7GYP7A");
+        })();
+    </script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <div class="loader-logo">
+                <span class="loader-text">W</span>
+                <span class="loader-text">E</span>
+                <span class="loader-text">B</span>
+                <span class="loader-text">J</span>
+                <span class="loader-text">A</span>
+                <span class="loader-text">L</span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-bar-fill" id="loader-bar-fill"></div>
+            </div>
+            <p class="loader-subtitle">Loading Digital Experience...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="nav-logo">
+                <span class="logo-bracket">&lt;</span>Webjal<span class="logo-dot">.</span>Studios<span
+                    class="logo-bracket">/&gt;</span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" class="nav-link active" data-section="hero">Home</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="#services" class="nav-link" data-section="services">Services</a></li>
+                <li><a href="#portfolio" class="nav-link" data-section="portfolio">Portfolio</a></li>
+                <li><a href="#why-us" class="nav-link" data-section="why-us">Why Us</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Three.js Canvas -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>Digital Agency of the Future</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line" data-delay="0">We Build</span>
+                <span class="title-line gradient-text" data-delay="0.2">Digital</span>
+                <span class="title-line" data-delay="0.4">Experiences</span>
+            </h1>
+            <p class="hero-subtitle">Websites, Software &amp; Creative Solutions</p>
+            <div class="hero-cta">
+                <a href="#portfolio" class="btn btn-primary" id="cta-view-work">
+                    <span>View Our Work</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="#contact" class="btn btn-outline" id="cta-contact">
+                    <span>Get In Touch</span>
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="150">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Projects Done</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="98">0</span><span class="stat-plus">%</span>
+                    <span class="stat-label">Client Satisfaction</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="5">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" id="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">About Us</span>
+                <h2 class="section-title">Crafting <span class="gradient-text">Digital Excellence</span></h2>
+                <p class="section-subtitle">We are a passionate team of designers, developers, and strategists who
+                    transform ideas into extraordinary digital experiences.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-text reveal-up">
+                    <p>At <strong>Webjal Studios</strong>, we don't just build websites — we engineer immersive digital
+                        ecosystems. Our approach blends cutting-edge technology with creative artistry to deliver
+                        solutions that captivate audiences and drive results.</p>
+                    <p>From startups to enterprises, we partner with visionary brands to create pixel-perfect,
+                        performance-driven digital products that stand out in today's competitive landscape.</p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg>
+                            </div>
+                            <span>Innovation First</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg>
+                            </div>
+                            <span>Quality Assurance</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" />
+                                </svg>
+                            </div>
+                            <span>Client Focused</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-skills reveal-up" data-delay="0.2">
+                    <div class="skill-card glass-card">
+                        <div class="skill-icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <polyline points="16 18 22 12 16 6" />
+                                <polyline points="8 6 2 12 8 18" />
+                                <line x1="14" y1="4" x2="10" y2="20" />
+                            </svg>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Modern, responsive websites built with cutting-edge technologies and frameworks.</p>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card glass-card">
+                        <div class="skill-icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>
+                        </div>
+                        <h3>UI/UX Design</h3>
+                        <p>Intuitive, beautiful interfaces that users love to interact with.</p>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card glass-card">
+                        <div class="skill-icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <rect x="2" y="3" width="20" height="14" rx="2" />
+                                <line x1="8" y1="21" x2="16" y2="21" />
+                                <line x1="12" y1="17" x2="12" y2="21" />
+                            </svg>
+                        </div>
+                        <h3>Software Development</h3>
+                        <p>Robust, scalable software solutions tailored to your business needs.</p>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="88"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Services</span>
+                <h2 class="section-title">What We <span class="gradient-text">Offer</span></h2>
+                <p class="section-subtitle">We provide end-to-end digital solutions tailored to bring your vision to
+                    life.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal-up" data-delay="0">
+                    <div class="service-card-inner">
+                        <div class="service-card-front glass-card">
+                            <div class="service-number">01</div>
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                                    <line x1="8" y1="21" x2="16" y2="21" />
+                                    <line x1="12" y1="17" x2="12" y2="21" />
+                                </svg>
+                            </div>
+                            <h3>Website Development</h3>
+                            <p>Custom, responsive websites that deliver outstanding user experiences across all devices.
+                            </p>
+                            <div class="service-tags">
+                                <span>React</span><span>Next.js</span><span>Vue</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card reveal-up" data-delay="0.1">
+                    <div class="service-card-inner">
+                        <div class="service-card-front glass-card">
+                            <div class="service-number">02</div>
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <circle cx="9" cy="21" r="1" />
+                                    <circle cx="20" cy="21" r="1" />
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                                </svg>
+                            </div>
+                            <h3>E-commerce Development</h3>
+                            <p>Powerful online stores with seamless payments, inventory management, and conversion
+                                optimization.</p>
+                            <div class="service-tags">
+                                <span>Shopify</span><span>WooCommerce</span><span>Custom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card reveal-up" data-delay="0.2">
+                    <div class="service-card-inner">
+                        <div class="service-card-front glass-card">
+                            <div class="service-number">03</div>
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <polyline points="16 18 22 12 16 6" />
+                                    <polyline points="8 6 2 12 8 18" />
+                                    <line x1="14" y1="4" x2="10" y2="20" />
+                                </svg>
+                            </div>
+                            <h3>Custom Software</h3>
+                            <p>Tailored software solutions designed to streamline your operations and boost
+                                productivity.</p>
+                            <div class="service-tags">
+                                <span>SaaS</span><span>API</span><span>Cloud</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card reveal-up" data-delay="0.3">
+                    <div class="service-card-inner">
+                        <div class="service-card-front glass-card">
+                            <div class="service-number">04</div>
+                            <div class="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M12 20h9" />
+                                    <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                                </svg>
+                            </div>
+                            <h3>UI/UX Design</h3>
+                            <p>Research-driven design that creates intuitive, delightful experiences your users will
+                                love.</p>
+                            <div class="service-tags">
+                                <span>Figma</span><span>Prototyping</span><span>Research</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Work</span>
+                <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+                <p class="section-subtitle">A showcase of our finest work across various industries and technologies.
+                </p>
+            </div>
+
+            <!-- Portfolio Filter Tabs -->
+            <div class="portfolio-filters" id="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="website">Websites</button>
+                <button class="filter-btn" data-filter="software">Software</button>
+                <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Project 1: IronFit Gym -->
+                <div class="portfolio-card reveal-up" data-delay="0" data-category="website" id="project-gym">
+                    <div class="portfolio-image">
+                        <img src="assets/projects/gym-website.png" alt="IronFit Gym - Premium Fitness Website"
+                            loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <span class="portfolio-category">Website</span>
+                                <h3>IronFit Gym</h3>
+                                <p>A bold, high-energy gym website with membership plans, trainer profiles, class
+                                    schedules, and online booking.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Glamour Salon -->
+                <div class="portfolio-card reveal-up" data-delay="0.1" data-category="website" id="project-salon">
+                    <div class="portfolio-image">
+                        <img src="assets/projects/salon-website.png" alt="Glamour Salon - Luxury Beauty Website"
+                            loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <span class="portfolio-category">Website</span>
+                                <h3>Glamour Salon</h3>
+                                <p>An elegant beauty salon website with online appointment booking, service gallery,
+                                    pricing packages, and stylist profiles.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: LibraTrack (Library Management) -->
+                <div class="portfolio-card reveal-up" data-delay="0.2" data-category="software" id="project-library">
+                    <div class="portfolio-image">
+                        <img src="assets/projects/library-management.png" alt="LibraTrack - Library Management Software"
+                            loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <span class="portfolio-category">Software</span>
+                                <h3>LibraTrack</h3>
+                                <p>A comprehensive library management system with book cataloging, member management,
+                                    issue/return tracking, and analytics dashboard.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Savoria Restaurant -->
+                <div class="portfolio-card reveal-up" data-delay="0.3" data-category="website" id="project-restaurant">
+                    <div class="portfolio-image">
+                        <img src="assets/projects/restaurant-website.png" alt="Savoria - Premium Restaurant Website"
+                            loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <span class="portfolio-category">Website</span>
+                                <h3>Savoria Restaurant</h3>
+                                <p>A visually stunning restaurant website with digital menu, table reservations, food
+                                    gallery, and order tracking.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Luxe Properties -->
+                <div class="portfolio-card reveal-up" data-delay="0.4" data-category="website" id="project-realestate">
+                    <div class="portfolio-image">
+                        <img src="assets/projects/realestate-website.png" alt="Luxe Properties - Real Estate Platform"
+                            loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <span class="portfolio-category">Website</span>
+                                <h3>Luxe Properties</h3>
+                                <p>A premium real estate platform with advanced property search, virtual tours, agent
+                                    profiles, and mortgage calculator.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: Urban Threads -->
+                <div class="portfolio-card reveal-up" data-delay="0.5" data-category="ecommerce" id="project-ecommerce">
+                    <div class="portfolio-image">
+                        <img src="assets/projects/ecommerce-website.png" alt="Urban Threads - Fashion E-commerce"
+                            loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <span class="portfolio-category">E-commerce</span>
+                                <h3>Urban Threads</h3>
+                                <p>A modern fashion e-commerce store with product filtering, wishlist, secure checkout,
+                                    and inventory management.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section why-us" id="why-us">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Why Choose Us</span>
+                <h2 class="section-title">The Webjal <span class="gradient-text">Advantage</span></h2>
+                <p class="section-subtitle">Here's why industry leaders, startups, and forward-thinking brands choose
+                    Webjal Studios.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card glass-card reveal-up" data-delay="0">
+                    <div class="why-icon-wrap">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                    </div>
+                    <h3>Lightning Fast Delivery</h3>
+                    <p>We move fast without compromising quality. Our agile workflow ensures your project launches on
+                        time, every time.</p>
+                    <div class="why-metric">
+                        <span class="metric-value">2x</span>
+                        <span class="metric-label">Faster than industry average</span>
+                    </div>
+                </div>
+                <div class="why-card glass-card reveal-up" data-delay="0.1">
+                    <div class="why-icon-wrap">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        </svg>
+                    </div>
+                    <h3>Modern Design</h3>
+                    <p>Cutting-edge aesthetics that make your brand unforgettable. We stay ahead of design trends to
+                        keep you relevant.</p>
+                    <div class="why-metric">
+                        <span class="metric-value">100%</span>
+                        <span class="metric-label">Custom designed</span>
+                    </div>
+                </div>
+                <div class="why-card glass-card reveal-up" data-delay="0.2">
+                    <div class="why-icon-wrap">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <line x1="12" y1="1" x2="12" y2="23" />
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                    </div>
+                    <h3>Affordable Pricing</h3>
+                    <p>Premium quality doesn't have to break the bank. Flexible packages designed to fit budgets of all
+                        sizes.</p>
+                    <div class="why-metric">
+                        <span class="metric-value">40%</span>
+                        <span class="metric-label">More cost-effective</span>
+                    </div>
+                </div>
+                <div class="why-card glass-card reveal-up" data-delay="0.3">
+                    <div class="why-icon-wrap">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </div>
+                    <h3>Client Satisfaction</h3>
+                    <p>Your success is our success. We listen, iterate, and deliver until you're absolutely thrilled
+                        with the result.</p>
+                    <div class="why-metric">
+                        <span class="metric-value">98%</span>
+                        <span class="metric-label">Satisfaction rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Get In Touch</span>
+                <h2 class="section-title">Let's Build Something <span class="gradient-text">Amazing</span></h2>
+                <p class="section-subtitle">Ready to start your project? Drop us a message and let's shape the future
+                    together.</p>
+            </div>
+            <div class="contact-grid">
+                <form class="contact-form glass-card reveal-up" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        <div class="input-glow"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <div class="input-glow"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..."
+                            required></textarea>
+                        <div class="input-glow"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+                        <span>Send Message</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                    </button>
+                    <div class="form-success" id="form-success">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                        <p>Message sent successfully! We'll get back to you soon.</p>
+                    </div>
+                </form>
+                <div class="contact-info reveal-up" data-delay="0.2">
+                    <div class="info-card glass-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Email Us</h4>
+                            <a href="mailto:webjalstudios@outlook.com">webjalstudios@outlook.com</a>
+                        </div>
+                    </div>
+                    <div class="info-card glass-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Noida Sector 62, Uttar Pradesh</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="https://wa.me/917599508709" target="_blank" rel="noopener noreferrer" class="social-link" id="social-whatsapp" aria-label="WhatsApp">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                                </svg>
+                            </a>
+                            <a href="https://instagram.com/webjalstudios" target="_blank" rel="noopener noreferrer" class="social-link" id="social-instagram" aria-label="Instagram">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <span class="logo-bracket">&lt;</span>Webjal<span class="logo-dot">.</span>Studios<span
+                            class="logo-bracket">/&gt;</span>
+                    </a>
+                    <p>Crafting digital experiences that inspire, engage, and convert.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#hero">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Webjal Studios. All rights reserved.</p>
+                <p>Designed & Built with <span class="heart">&hearts;</span> by Webjal</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            emailjs.sendForm("service_uyia7tk", "template_gt8otnc", this)
+                .then(function () {
+                    alert("Message sent successfully!");
+                }, function (error) {
+                    alert("Failed to send message!");
+                });
+        });
+    </script>
+</body>
+
+</html>
